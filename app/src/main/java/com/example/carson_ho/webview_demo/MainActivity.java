@@ -1,8 +1,8 @@
 package com.example.carson_ho.webview_demo;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -12,10 +12,9 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity{
     WebView mWebview;
     WebSettings mWebSettings;
-    TextView beginLoading,endLoading,loading,mtitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +23,18 @@ public class MainActivity extends AppCompatActivity {
 
 
         mWebview = (WebView) findViewById(R.id.webView1);
-        beginLoading = (TextView) findViewById(R.id.text_beginLoading);
-        endLoading = (TextView) findViewById(R.id.text_endLoading);
-        loading = (TextView) findViewById(R.id.text_Loading);
-        mtitle = (TextView) findViewById(R.id.title);
 
         mWebSettings = mWebview.getSettings();
+        mWebSettings.setUseWideViewPort(true);
+        mWebSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        mWebSettings.setLoadWithOverviewMode(true);
+        mWebSettings.setJavaScriptEnabled(true);
+        mWebSettings.setSupportZoom(true);
+        mWebSettings.setMinimumLogicalFontSize(8);
+        mWebSettings.setDefaultFontSize(40);
 
-        mWebview.loadUrl("http://www.baidu.com/");
+
+        mWebview.loadUrl("http://47.96.251.49/caoliu/www/index_m.php?fid=7");
 
 
         //设置不用系统浏览器打开,直接显示在当前Webview
@@ -51,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 System.out.println("标题在这里");
-                mtitle.setText(title);
             }
 
 
@@ -60,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress < 100) {
                     String progress = newProgress + "%";
-                    loading.setText(progress);
+                    System.out.println(progress);
                 } else if (newProgress == 100) {
                     String progress = newProgress + "%";
-                    loading.setText(progress);
+                    System.out.println(progress);
                 }
             }
         });
@@ -75,14 +77,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 System.out.println("开始加载了");
-                beginLoading.setText("开始加载了");
 
             }
 
             //设置结束加载函数
             @Override
             public void onPageFinished(WebView view, String url) {
-                endLoading.setText("结束加载了");
+                System.out.println("结束加载了");
 
             }
         });
