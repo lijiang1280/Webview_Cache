@@ -34,7 +34,7 @@ public class MainActivity extends Activity{
         mWebSettings.setDefaultFontSize(40);
 
 
-        mWebview.loadUrl("http://47.96.251.49/caoliu/www/index_m.php?fid=7");
+        mWebview.loadUrl("http://www.qq.com");
 
 
         //设置不用系统浏览器打开,直接显示在当前Webview
